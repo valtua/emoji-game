@@ -6,22 +6,31 @@
 
 body {
   font-family: "Roboto", sans-serif;
-}
-
-section {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-}
-
-section .card {
+  height: 100vh;
   display: flex;
-  justify-content: center;
-  height: 10rem;
-  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 h1 {
   text-align: center;
-  padding: 3rem 0;
+  font-size: 4rem;
+}
+
+.card-section {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  padding: 0 3rem;
+  margin-right: 30%;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  height: 10rem;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 10px;
+  font-size: 5rem;
 }

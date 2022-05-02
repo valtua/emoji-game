@@ -8,8 +8,31 @@ function handleCardClick() {
 }
 
 function createGame() {
-  const emojis = ["😀", "🫠", "😋","😋","😋","😋","😋","😋","😀", "🫠", "😋","😋","😋","😋","😋","😋"];
+  const emojis = [
+    "😀",
+    "🫠",
+    "😋",
+    "😋",
+    "😋",
+    "😋",
+    "😋",
+    "😋",
+    "😀",
+    "🫠",
+    "😋",
+    "😋",
+    "😋",
+    "😋",
+    "😋",
+    "😋",
+  ];
+
+  const h1 = document.createElement("h1");
+  h1.textContent = "Emoji Game";
+  document.body.appendChild(h1);
+
   const section = document.createElement("section");
+  section.classList.add("card-section");
 
   emojis.forEach((emoji) => {
     const article = document.createElement("article");
