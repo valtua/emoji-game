@@ -1,0 +1,24 @@
+{
+  "name": "emoji-game",
+  "version": "0.1.0",
+  "description": "Juego de memoria con emojis.",
+  "private": true,
+  "source": "src/index.html",
+  "scripts": {
+    "dev": "parcel",
+    "build": "parcel build src/index.html --public-url ./"
+  },
+  "keywords": [
+    "emojis",
+    "juego",
+    "memoria"
+  ],
+  "authors": [
+    "Adrián Rey <adrianreylomba@gmail.com>",
+    "João Silva <joaofrsima2000@gmail.com>"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "parcel": "^2.5.0"
+  }
+}
