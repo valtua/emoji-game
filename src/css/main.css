@@ -7,3 +7,21 @@
 body {
   font-family: "Roboto", sans-serif;
 }
+
+section {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+section .card {
+  display: flex;
+  justify-content: center;
+  height: 10rem;
+  align-items: center;
+}
+
+h1 {
+  text-align: center;
+  padding: 3rem 0;
+}
