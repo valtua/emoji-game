@@ -53,6 +53,7 @@ h1 {
   border-radius: 10px;
   font-size: 5rem;
   background-color: var(--bg-card);
+  cursor: pointer;
 }
 
 .attempts {
@@ -64,4 +65,5 @@ h1 {
 
 .match {
   background-color: green;
+  cursor: default;
 }

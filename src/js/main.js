@@ -1,3 +1,4 @@
+const emojis = shuffleEmojis();
 let storedCards = [];
 let attempts = 0;
 
@@ -5,11 +6,17 @@ document.addEventListener("DOMContentLoaded", () => {
   createGame();
 });
 
+function updateAttempts() {
+  document.querySelector(".attempts > h2").innerHTML = `Intentos: ${attempts}`;
+}
+
 function handleCardClick() {
   // only select one card at a time
   if (storedCards.length > 1) return;
 
   storedCards.push(this);
+
+  this.textContent = emojis[this.dataset.emoji];
 
   this.removeEventListener("click", handleCardClick);
 
@@ -17,20 +24,28 @@ function handleCardClick() {
   if (storedCards.length !== 2) return;
 
   attempts++;
-  console.log("Intentos:" + attempts);
+  updateAttempts();
 
-  if (storedCards[0].textContent !== storedCards[1].textContent) {
+  checkCards(storedCards[0], storedCards[1]);
+}
+
+function checkCards(firstCard, secondCard) {
+  if (firstCard.textContent !== secondCard.textContent) {
     setTimeout(() => {
-      storedCards[0].addEventListener("click", handleCardClick);
-      storedCards[1].addEventListener("click", handleCardClick);
+      firstCard.addEventListener("click", handleCardClick);
+      secondCard.addEventListener("click", handleCardClick);
+
+      firstCard.textContent = "❔";
+      secondCard.textContent = "❔";
+
       storedCards = [];
     }, 1000);
 
     return;
   }
 
-  storedCards[0].classList.add("match");
-  storedCards[1].classList.add("match");
+  firstCard.classList.add("match");
+  secondCard.classList.add("match");
   storedCards = [];
 }
 
@@ -46,27 +61,24 @@ function createGame() {
   article.classList.add("cards");
 
   const aside = document.createElement("aside");
-  aside.classList.add("attempts")
-  const paragraphAside = document.createElement("p");
-  paragraphAside.textContent = `Intentos: ${attempts}`;
-  aside.appendChild(paragraphAside);
+  aside.classList.add("attempts");
+  const headingAside = document.createElement("h2");
+  headingAside.textContent = `Intentos: ${attempts}`;
+  aside.appendChild(headingAside);
 
-  const emojis = shuffleEmojis();
-  emojis.forEach((emoji) => {
+  emojis.forEach((_, i) => {
     const div = document.createElement("div");
 
     div.classList.add("card");
-    // div.textContent = "❔";
-    div.textContent = emoji;
+    div.textContent = "❔";
+    div.dataset.emoji = i;
 
     div.addEventListener("click", handleCardClick);
 
     article.appendChild(div);
   });
 
-  section.appendChild(article);
-
-  section.appendChild(aside);
+  section.append(article, aside);
 
   document.body.appendChild(section);
 }
