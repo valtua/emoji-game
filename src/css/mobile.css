@@ -1,0 +1,23 @@
+h1 {
+  font-size: 3rem;
+}
+
+.content {
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.cards {
+  width: 100%;
+  padding: 0 1rem;
+}
+
+.card {
+  font-size: 2rem;
+  height: 7rem;
+}
+
+.attempts {
+  display: flex;
+  justify-content: center;
+}
