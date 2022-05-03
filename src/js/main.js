@@ -14,6 +14,8 @@ function handleCardClick() {
   // only select one card at a time
   if (storedCards.length > 1) return;
 
+  this.classList.add("flipped");
+
   storedCards.push(this);
 
   this.textContent = emojis[this.dataset.emoji];
@@ -34,6 +36,9 @@ function checkCards(firstCard, secondCard) {
     setTimeout(() => {
       firstCard.addEventListener("click", handleCardClick);
       secondCard.addEventListener("click", handleCardClick);
+
+      firstCard.classList.remove("flipped");
+      secondCard.classList.remove("flipped");
 
       firstCard.textContent = "❔";
       secondCard.textContent = "❔";
