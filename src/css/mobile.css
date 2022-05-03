@@ -1,8 +1,8 @@
-h1 {
+.title {
   font-size: 3rem;
 }
 
-.card {
-  font-size: 2rem;
-  height: 7rem;
+.front,
+.back {
+  font-size: 4rem;
 }
