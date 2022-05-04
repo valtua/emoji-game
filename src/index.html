@@ -25,5 +25,26 @@
     <script defer src="./js/main.js"></script>
   </head>
 
-  <body></body>
+  <body>
+    <audio id="wrong" src="./audio/wrong.wav" preload="auto"></audio>
+    <audio id="correct" src="./audio/correct.wav" preload="auto"></audio>
+
+    <template class="modal">
+      <div class="modal-overlay">
+        <article class="modal-container">
+          <header class="modal-header">
+            <h2 class="modal-title">Título</h2>
+            <p class="modal-content">
+              ¡Has ganado el juego! ¿Quieres jugar otra vez?
+            </p>
+          </header>
+
+          <footer class="footer">
+            <button class="button" id="play">Reiniciar juego</button>
+            <button class="button" id="exit">Salir</button>
+          </footer>
+        </article>
+      </div>
+    </template>
+  </body>
 </html>

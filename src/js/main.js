@@ -41,6 +41,8 @@ function checkCards() {
     emojis[secondCard.children[1].dataset.emoji]
   ) {
     setTimeout(() => {
+      document.querySelector("#wrong").play();
+
       firstCard.addEventListener("click", handleCardClick);
       secondCard.addEventListener("click", handleCardClick);
 
@@ -55,10 +57,21 @@ function checkCards() {
   storedCards = [];
   cardsLeft -= 2;
 
+  setTimeout(() => {
+    document.querySelector("#correct").play();
+  }, 500);
+
   if (!cardsLeft) {
     // create a modal window
     console.log("Juego terminado");
   }
+}
+
+function createModal() {
+  const template = document.querySelector(".modal").content;
+  const modal = template.cloneNode(true);
+
+  // document.body.appendChild(modal);
 }
 
 function createGame() {
@@ -86,7 +99,7 @@ function createGame() {
 
     articleCards.appendChild(card);
   }
-
+  createModal();
   section.append(headingTitle, articleCards, articleAttempts);
   document.body.appendChild(section);
 }

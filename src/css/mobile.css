@@ -2,7 +2,11 @@
   font-size: 3rem;
 }
 
+.card {
+  height: 7rem;
+}
+
 .front,
 .back {
-  font-size: 4rem;
+  font-size: 3rem;
 }
