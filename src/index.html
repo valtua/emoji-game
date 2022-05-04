@@ -26,22 +26,25 @@
   </head>
 
   <body>
+    <main></main>
+
     <audio id="wrong" src="./audio/wrong.wav" preload="auto"></audio>
     <audio id="correct" src="./audio/correct.wav" preload="auto"></audio>
+    <audio id="applause" src="./audio/applause.wav" preload="auto"></audio>
 
     <template class="modal">
       <div class="modal-overlay">
         <article class="modal-container">
           <header class="modal-header">
-            <h2 class="modal-title">Título</h2>
-            <p class="modal-content">
-              ¡Has ganado el juego! ¿Quieres jugar otra vez?
-            </p>
+            <h2 class="modal-title">¡Felicidades!</h2>
           </header>
 
+          <p class="modal-content">
+            ¡Has ganado el juego! ¿Quieres jugar otra vez?
+          </p>
+
           <footer class="footer">
-            <button class="button" id="play">Reiniciar juego</button>
-            <button class="button" id="exit">Salir</button>
+            <button class="button" id="play-again">Reiniciar juego</button>
           </footer>
         </article>
       </div>

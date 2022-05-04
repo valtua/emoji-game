@@ -57,21 +57,38 @@ function checkCards() {
   storedCards = [];
   cardsLeft -= 2;
 
-  setTimeout(() => {
-    document.querySelector("#correct").play();
-  }, 500);
+  if (cardsLeft) {
+    setTimeout(() => {
+      document.querySelector("#correct").pause();
+      document.querySelector("#correct").currentTime = 0;
+      document.querySelector("#correct").play();
+    }, 500);
 
-  if (!cardsLeft) {
-    // create a modal window
-    console.log("Juego terminado");
+    return;
   }
+
+  setTimeout(() => {
+    createModal();
+  }, 500);
 }
 
 function createModal() {
   const template = document.querySelector(".modal").content;
   const modal = template.cloneNode(true);
 
-  // document.body.appendChild(modal);
+  document.querySelector("#applause").play();
+
+  document.querySelector("main").appendChild(modal);
+  // document.querySelector(".modal-attempts").textContent = attempts;
+
+  document.querySelector("#play-again").addEventListener("click", () => {
+    document.querySelector("main").innerHTML = "";
+    document.querySelector("#applause").pause();
+
+    cardsLeft = emojis.length;
+    attempts = 0;
+    createGame();
+  });
 }
 
 function createGame() {
@@ -99,9 +116,9 @@ function createGame() {
 
     articleCards.appendChild(card);
   }
-  createModal();
+
   section.append(headingTitle, articleCards, articleAttempts);
-  document.body.appendChild(section);
+  document.querySelector("main").appendChild(section);
 }
 
 function createElement(element, className) {
