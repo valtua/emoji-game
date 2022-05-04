@@ -130,7 +130,7 @@ function createElement(element, className) {
 }
 
 function shuffleEmojis() {
-  const emojis = ["🫠", "😋", "😀", "💩", "🧐", "😡", "🤠", "🙄"];
+  const emojis = ["😋", "😀", "💩", "🧐", "😡", "🙄", "👻", "👽"];
   const emojiList = emojis.concat(emojis);
   const shuffledEmojis = [];
 
