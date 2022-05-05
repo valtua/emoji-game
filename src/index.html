@@ -17,6 +17,10 @@
     />
 
     <!-- Scripts -->
+    <script
+      async
+      src="https://cdn.jsdelivr.net/npm/tsparticles-slim@2.0.6/tsparticles.slim.bundle.min.js"
+    ></script>
     <script defer src="./js/main.js"></script>
   </head>
 
@@ -29,14 +33,13 @@
 
     <template class="modal">
       <div class="modal-overlay">
+        <div id="tsparticles"></div>
         <article class="modal-container">
           <header class="modal-header">
             <h2 class="modal-title">¡Felicidades!</h2>
           </header>
 
-          <p class="modal-content">
-            ¡Has ganado el juego! ¿Quieres jugar otra vez?
-          </p>
+          <p class="modal-content">¡Has ganado! ¿Quieres jugar otra vez?</p>
 
           <footer class="footer">
             <button class="button" id="play-again">Reiniciar juego</button>
