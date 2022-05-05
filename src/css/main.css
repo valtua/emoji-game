@@ -17,10 +17,17 @@
 body {
   background-color: var(--bg-body);
   font-family: "Roboto", sans-serif;
-  height: 100vh;
   margin: 0 auto;
   max-width: 1200px;
   padding: 0 1rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100vh;
+  padding: 1rem 0;
 }
 
 .title {
@@ -32,40 +39,20 @@ body {
     -10px 10px 0px var(--color-title-2), -15px 15px 0px var(--color-title-3);
 }
 
-.content {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  height: 100vh;
-  justify-content: space-evenly;
-  padding: 1rem 0;
-}
-
 .cards {
   display: grid;
   gap: 1rem;
+  padding: 5% 0;
+  height: 100%;
   grid-template-columns: repeat(4, 1fr);
 }
 
 .card {
-  align-items: center;
   background-color: var(--bg-card);
   border-radius: 1rem;
   cursor: pointer;
-  display: flex;
-  font-size: 5rem;
-  height: 10rem;
-  justify-content: center;
   transform-style: preserve-3d;
   transition: transform 1s;
-}
-
-.attempts {
-  align-self: center;
-  background-color: var(--bg-card);
-  border-radius: 1rem;
-  color: var(--color-white);
-  padding: 1rem;
 }
 
 .front,
@@ -73,11 +60,10 @@ body {
   backface-visibility: hidden;
   border-radius: 1rem;
   display: grid;
-  font-size: 8rem;
+  font-size: 4rem;
   height: 100%;
   place-content: center;
   position: absolute;
-  user-select: none;
   width: 100%;
 }
 
@@ -92,6 +78,14 @@ body {
   transition: transform 0.5s;
 }
 
+.attempts {
+  align-self: center;
+  background-color: var(--bg-card);
+  border-radius: 1rem;
+  color: var(--color-white);
+  padding: 1rem;
+}
+
 .modal-overlay {
   background-color: rgba(0, 0, 0, 0.6);
   display: flex;
@@ -102,7 +96,6 @@ body {
   left: 0;
   top: 0;
   position: fixed;
-
   z-index: 10;
 }
 
@@ -134,4 +127,64 @@ body {
 
 .button:hover {
   border-color: var(--bg-card-back);
+}
+
+/* WIDTH */
+
+@media (max-width: 1024px) {
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .content {
+    padding: 0.5rem 0;
+  }
+
+  .cards {
+    padding: 0;
+  }
+
+  .attempts h2 {
+    font-size: 0.8rem;
+  }
+
+  .attempts {
+    padding: 0.5rem;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 768px) {
+  .cards {
+    padding: 0 4rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .cards {
+    padding: 0 8rem;
+  }
+
+  .attempts h2 {
+    font-size: 1rem;
+  }
+}
+
+/* HEIGHT */
+
+@media (max-height: 450px) {
+  .front,
+  .back {
+    font-size: 2rem;
+  }
+}
+
+@media (min-height: 451px) and (max-height: 600px) {
+  .front,
+  .back {
+    font-size: 3rem;
+  }
 }
