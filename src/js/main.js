@@ -42,7 +42,9 @@ function checkCards() {
   ) {
     setTimeout(() => {
       document.querySelector("#wrong").play();
+    }, 500);
 
+    setTimeout(() => {
       firstCard.addEventListener("click", handleCardClick);
       secondCard.addEventListener("click", handleCardClick);
 
@@ -171,7 +173,28 @@ function createModal() {
     },
   });
 
-  // document.querySelector(".modal-attempts").textContent = attempts;
+  const iconAttempts = document.querySelector(".icon-attempts");
+  const modalTitle = document.querySelector(".modal-title");
+
+  switch (true) {
+    case 8:
+      modalTitle.textContent = "¡PERFECTO!";
+      iconAttempts.textContent = "🏆";
+      break;
+    case attempts <= 12:
+      modalTitle.textContent = "¡MUY BIEN!";
+      iconAttempts.textContent = "👏";
+      break;
+    case attempts <= 17:
+      modalTitle.textContent = "¡BUEN INTENTO!";
+      iconAttempts.textContent = "🤔";
+      break;
+    default:
+      modalTitle.textContent = "VAYA...";
+      iconAttempts.textContent = "💩";
+  }
+
+  document.querySelector(".modal-attempts").textContent = attempts;
 
   document.querySelector("#play-again").addEventListener("click", () => {
     location.reload();
