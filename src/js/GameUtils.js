@@ -73,8 +73,13 @@ const checkCards = (firstCard, secondCard) => {
       firstCard.classList.remove("flipped");
       secondCard.classList.remove("flipped");
 
+      // Stop cheating!
+      firstCard.addEventListener("transitionend", handleCardTransitionEnd);
+      secondCard.addEventListener("transitionend", handleCardTransitionEnd);
+
       GameState.storedCards = [];
     }, 1000);
+
     return;
   }
 
@@ -94,6 +99,13 @@ const checkCards = (firstCard, secondCard) => {
   setTimeout(() => {
     createModal();
   }, 500);
+};
+
+const handleCardTransitionEnd = (e) => {
+  if (e.currentTarget.classList.contains("flipped")) return;
+
+  e.currentTarget.children[1].textContent = "";
+  e.currentTarget.removeEventListener("transitionend", handleCardTransitionEnd);
 };
 
 const createElement = (element, className) => {
