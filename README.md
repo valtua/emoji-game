@@ -27,6 +27,12 @@ Iniciar el servidor de desarrollo:
 npm run dev
 ```
 
+## Imágenes
+
+![Screenshot_1](/docs/Screenshot_1.png)
+![Screenshot_2](/docs/Screenshot_2.png)
+![Screenshot_3](/docs/Screenshot_3.png)
+
 ## Autores
 
 - **Adrián Rey** ([@arlomba](https://github.com/arlomba))
