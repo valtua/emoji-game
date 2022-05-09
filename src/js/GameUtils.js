@@ -26,7 +26,6 @@ export const createGame = () => {
     const back = createElement("div", "back");
 
     front.textContent = "❔";
-    front.textContent = GameState.emojis[i].emoji;
     back.dataset.emoji = i;
 
     card.append(front, back);

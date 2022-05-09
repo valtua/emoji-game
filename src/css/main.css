@@ -105,8 +105,7 @@ body {
 .modal-container {
   background-color: var(--bg-card);
   color: var(--color-white);
-  border-radius: 1rem;
-  padding: 1rem;
+  /* border-radius: 1rem; */
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -119,15 +118,16 @@ body {
 
 .modal-title {
   text-align: center;
+  width: 100%;
 }
 
 .icon-attempts {
   font-size: 5rem;
-  padding: 1rem 0;
 }
 
 .modal-content {
-  padding-bottom: 1rem;
+  padding: 0 1rem 0.5rem;
+  text-align: center;
 }
 
 .button {
@@ -142,6 +142,10 @@ body {
 
 .button:hover {
   border-color: var(--bg-card-back);
+}
+
+.footer {
+  padding-bottom: 1rem;
 }
 
 #tsparticles,
@@ -178,21 +182,28 @@ body {
   justify-content: space-between;
   width: 100%;
   align-items: center;
+  padding: 0.5rem;
 }
 
 .leaderboard-table {
   width: 100%;
   border-collapse: collapse;
-  text-align: center;
-}
-
-.leaderboard-table > * > * > *:last-child {
   text-align: right;
 }
 
 .leaderboard-header > * > *,
 .leaderboard-list > * > * {
   padding: 0.5rem;
+}
+
+.leaderboard-header > * > *:last-child,
+.leaderboard-list > * > *:last-child {
+  padding-right: 1.5rem;
+}
+
+.leaderboard-list > * > *:only-child {
+  text-align: center;
+  padding-right: 0;
 }
 
 .leaderboard-list > tr:nth-child(odd) {
