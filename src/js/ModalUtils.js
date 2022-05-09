@@ -1,4 +1,5 @@
 import { GameState } from "./GameState";
+import { formatTimeMessage } from "./GlobalUtils";
 
 export const createModal = () => {
   const template = document.querySelector(".modal").content;
@@ -18,11 +19,11 @@ export const createModal = () => {
       modalTitle.textContent = "¡PERFECTO!";
       iconAttempts.textContent = "🏆";
       break;
-    case GameState.attempts <= 12:
+    case GameState.attempts <= 12 && GameState.time < 30:
       modalTitle.textContent = "¡MUY BIEN!";
       iconAttempts.textContent = "👏";
       break;
-    case GameState.attempts <= 17:
+    case GameState.attempts <= 17 && GameState.time < 60:
       modalTitle.textContent = "¡NO ESTÁ MAL!";
       iconAttempts.textContent = "🤔";
       break;
@@ -31,7 +32,10 @@ export const createModal = () => {
       iconAttempts.textContent = "💩";
   }
 
-  document.querySelector(".modal-attempts").textContent = GameState.attempts;
+  document.querySelector(".modal-content").textContent = formatTimeMessage(
+    GameState.time,
+    GameState.attempts
+  );
 
   document.querySelector("#play-again").addEventListener("click", () => {
     location.reload();

@@ -8,7 +8,7 @@ export const getEmojiList = () => {
     emojiList.push(data[Math.floor(Math.random() * data.length)]);
   }
 
-  return emojiList.map(({ emoji }) => emoji);
+  return emojiList.map((emoji) => emoji);
 };
 
 export const shuffleEmojis = (emojis) => {

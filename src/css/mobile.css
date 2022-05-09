@@ -7,6 +7,7 @@
 
   .title {
     font-size: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   .cards {
@@ -15,6 +16,7 @@
 
   .attempts {
     padding: 0.5rem;
+    margin-top: 1rem;
   }
 
   .attempts h2 {
@@ -54,6 +56,7 @@
 @media (max-height: 700px) {
   .title {
     font-size: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   .cards {
@@ -62,6 +65,7 @@
 
   .attempts {
     padding: 0.5rem;
+    margin-top: 1rem;
   }
 
   .attempts h2 {

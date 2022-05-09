@@ -8,7 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   GameState.emojis = shuffleEmojis(emojis);
   GameState.cardsLeft = GameState.emojis.length;
-  tsParticlesConfig.particles.shape.character[0].value = GameState.emojis;
+  tsParticlesConfig.particles.shape.character[0].value = GameState.emojis.map(
+    ({ emoji }) => emoji
+  );
 
   createGame();
 });

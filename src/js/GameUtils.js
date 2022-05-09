@@ -1,17 +1,24 @@
 import { GameState } from "./GameState";
 import { createModal } from "./ModalUtils";
+import { createLeaderboard } from "./Leaderboard";
+import { createElement, formatTime } from "./GlobalUtils";
 
 export const createGame = () => {
   const headingTitle = createElement("h1", "title");
   const section = createElement("section", "content");
   const articleCards = createElement("article", "cards");
   const articleAttempts = createElement("aside", "attempts");
-  const headingAttempts = createElement("h2", "subtitle");
+  const headingScore = createElement("h2", "score");
+  const buttonLeaderboard = createElement("button", "leaderboard-open");
 
   headingTitle.textContent = "Emoji Game";
-  headingAttempts.textContent = `Intentos: ${GameState.attempts}`;
+  headingScore.textContent = `Intentos: ${
+    GameState.attempts
+  } - Tiempo: ${formatTime(GameState.time)}`;
 
-  articleAttempts.appendChild(headingAttempts);
+  articleAttempts.appendChild(headingScore);
+  buttonLeaderboard.textContent = "Ver tabla";
+  buttonLeaderboard.addEventListener("click", createLeaderboard);
 
   GameState.emojis.forEach((_, i) => {
     const card = createElement("div", "card");
@@ -19,6 +26,7 @@ export const createGame = () => {
     const back = createElement("div", "back");
 
     front.textContent = "❔";
+    front.textContent = GameState.emojis[i].emoji;
     back.dataset.emoji = i;
 
     card.append(front, back);
@@ -27,13 +35,30 @@ export const createGame = () => {
     articleCards.appendChild(card);
   });
 
-  section.append(headingTitle, articleCards, articleAttempts);
+  section.append(
+    buttonLeaderboard,
+    headingTitle,
+    articleCards,
+    articleAttempts
+  );
   document.querySelector("main").appendChild(section);
 };
 
 const handleCardClick = (e) => {
   // only select one card at a time
   if (GameState.storedCards.length > 1) return;
+
+  if (!GameState.gameStarted) {
+    GameState.interval = setInterval(() => {
+      GameState.time++;
+
+      document.querySelector(".score").textContent = `Intentos: ${
+        GameState.attempts
+      } - Tiempo: ${formatTime(GameState.time)}`;
+    }, 1000);
+
+    GameState.gameStarted = true;
+  }
 
   const current = e.currentTarget;
 
@@ -44,23 +69,37 @@ const handleCardClick = (e) => {
   current.removeEventListener("click", handleCardClick);
 
   current.children[1].textContent =
-    GameState.emojis[current.children[1].dataset.emoji];
+    GameState.emojis[current.children[1].dataset.emoji].emoji;
 
   // return if the user hasn't selected two cards
   if (GameState.storedCards.length !== 2) return;
 
   GameState.attempts++;
-  document.querySelector(
-    ".subtitle"
-  ).innerHTML = `Intentos: ${GameState.attempts}`;
+  document.querySelector(".score").textContent = `Intentos: ${
+    GameState.attempts
+  } - Tiempo: ${formatTime(GameState.time)}`;
 
-  checkCards(GameState.storedCards[0], GameState.storedCards[1]);
+  const gameFinished = checkCards(
+    GameState.storedCards[0],
+    GameState.storedCards[1]
+  );
+
+  if (gameFinished) {
+    clearInterval(GameState.interval);
+    GameState.gameStarted = false;
+
+    saveData();
+
+    setTimeout(() => {
+      createModal();
+    }, 500);
+  }
 };
 
 const checkCards = (firstCard, secondCard) => {
   if (
-    GameState.emojis[firstCard.children[1].dataset.emoji] !==
-    GameState.emojis[secondCard.children[1].dataset.emoji]
+    GameState.emojis[firstCard.children[1].dataset.emoji].id !==
+    GameState.emojis[secondCard.children[1].dataset.emoji].id
   ) {
     setTimeout(() => {
       document.querySelector("#wrong").play();
@@ -96,9 +135,7 @@ const checkCards = (firstCard, secondCard) => {
     return;
   }
 
-  setTimeout(() => {
-    createModal();
-  }, 500);
+  return true;
 };
 
 const handleCardTransitionEnd = (e) => {
@@ -108,10 +145,28 @@ const handleCardTransitionEnd = (e) => {
   e.currentTarget.removeEventListener("transitionend", handleCardTransitionEnd);
 };
 
-const createElement = (element, className) => {
-  const elm = document.createElement(element);
+const saveData = () => {
+  const data = JSON.parse(localStorage.getItem("leaderboard")) || [];
+  const newData = {
+    attempts: GameState.attempts,
+    time: GameState.time,
+  };
 
-  elm.classList.add(className);
+  if (data.length < 10) {
+    data.push(newData);
+    data.sort((a, b) => a.attempts - b.attempts || a.time - b.time);
+  }
 
-  return elm;
+  if (data.length === 10) {
+    if (
+      data[data.length - 1].attempts > newData.attempts ||
+      data[data.length - 1].time > newData.time
+    ) {
+      data.pop();
+      data.push(newData);
+      data.sort((a, b) => a.attempts - b.attempts || a.time - b.time);
+    }
+  }
+
+  localStorage.setItem("leaderboard", JSON.stringify(data));
 };
