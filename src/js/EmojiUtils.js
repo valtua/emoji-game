@@ -5,7 +5,9 @@ export const getEmojiList = () => {
   const emojiList = [];
 
   while (emojiList.length < GameState.emojiLimit) {
-    emojiList.push(data[Math.floor(Math.random() * data.length)]);
+    const randomIndex = Math.floor(Math.random() * data.length);
+    emojiList.push(data[randomIndex]);
+    data.splice(randomIndex, 1);
   }
 
   return emojiList.map((emoji) => emoji);
